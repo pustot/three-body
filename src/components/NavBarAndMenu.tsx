@@ -135,8 +135,7 @@ export default function NavBarAndMenu(props: {
                         id="demo-simple-select"
                         value={lang}
                         label="Language"
-                        onChange={handleLangChange}
-                    >
+                        onChange={handleLangChange}>
                         <MenuItem value={"en"}>English</MenuItem>
                         <MenuItem value={"zh-Hans"}>简体中文</MenuItem>
                         <MenuItem value={"zh-Hant"}>繁體中文</MenuItem>
@@ -160,8 +159,7 @@ export default function NavBarAndMenu(props: {
                         color="inherit"
                         aria-label="menu"
                         sx={{ mr: 2 }}
-                        onClick={toggleDrawer(true)}
-                    >
+                        onClick={toggleDrawer(true)}>
                         <MenuIcon />
                     </IconButton>
 
@@ -176,8 +174,7 @@ export default function NavBarAndMenu(props: {
                                 fontSize: 16,
                             }}
                             component={Link}
-                            to="/three-body"
-                        >
+                            to="/three-body">
                             {getLocaleText(
                                 {
                                     "en": "Three-Body Problem",
@@ -198,8 +195,7 @@ export default function NavBarAndMenu(props: {
                             flexGrow: 0,
                             display: { xs: "block", md: "flex" },
                             overflow: "hidden",
-                        }}
-                    >
+                        }}>
                         <IconButton onClick={colorMode.toggleColorMode} color="inherit">
                             {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
                         </IconButton>
@@ -210,8 +206,7 @@ export default function NavBarAndMenu(props: {
                             aria-controls={isLangMenuOpen ? "account-menu" : undefined}
                             aria-haspopup="true"
                             aria-expanded={isLangMenuOpen ? "true" : undefined}
-                            color="inherit"
-                        >
+                            color="inherit">
                             <LanguageIcon />
                         </IconButton>
                         <Menu
@@ -219,55 +214,47 @@ export default function NavBarAndMenu(props: {
                             id="account-menu"
                             open={isLangMenuOpen}
                             onClose={handleLangMenuClose}
-                            onClick={handleLangMenuClose}
-                        >
+                            onClick={handleLangMenuClose}>
                             <MenuItem
                                 onClick={() => {
                                     handleLangMenuItemClick("en");
-                                }}
-                            >
+                                }}>
                                 English
                             </MenuItem>
                             <MenuItem
                                 onClick={() => {
                                     handleLangMenuItemClick("zh-Hans");
-                                }}
-                            >
+                                }}>
                                 简体中文
                             </MenuItem>
                             <MenuItem
                                 onClick={() => {
                                     handleLangMenuItemClick("zh-Hant");
-                                }}
-                            >
+                                }}>
                                 繁體中文
                             </MenuItem>
                             <MenuItem
                                 onClick={() => {
                                     handleLangMenuItemClick("ja");
-                                }}
-                            >
+                                }}>
                                 日本語
                             </MenuItem>
                             <MenuItem
                                 onClick={() => {
                                     handleLangMenuItemClick("de");
-                                }}
-                            >
+                                }}>
                                 Deutsch
                             </MenuItem>
                             <MenuItem
                                 onClick={() => {
                                     handleLangMenuItemClick("tto-bro");
-                                }}
-                            >
+                                }}>
                                 b8Q7Z2D.
                             </MenuItem>
                             <MenuItem
                                 onClick={() => {
                                     handleLangMenuItemClick("tto");
-                                }}
-                            >
+                                }}>
                                 mim
                             </MenuItem>
                         </Menu>
