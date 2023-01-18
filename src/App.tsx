@@ -74,7 +74,7 @@ export default function App() {
                         <footer>
                             <Typography align="center">
                                 Chenxi Yang <br />
-                                <a href="https://github.com/yangchnx">
+                                <a href="https://github.com/yangchnx/three-body">
                                     <img
                                         src={
                                             "https://img.shields.io/badge/-@yangchnx-" +

@@ -2,22 +2,19 @@ import "purecss/build/pure.css";
 import * as React from "react";
 import "../styles.scss";
 
-import { Box, Button, Container, Grid, IconButton, Link as MuiLink, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, IconButton, LinearProgress, Link as MuiLink, Stack, TextField, Typography } from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
 import { Chart as ChartJS, Colors, LinearScale, PointElement, LineElement, Tooltip, Legend } from "chart.js";
 import { Scatter } from "react-chartjs-2";
 import zoomPlugin from "chartjs-plugin-zoom";
 
 import { getLocaleText, I18nText } from "../data/I18n";
 import API from "../utils/API";
+import CircularProgress from "@mui/material/CircularProgress";
 
 ChartJS.register(Colors, LinearScale, PointElement, LineElement, Tooltip, Legend, zoomPlugin);
 
 export const options = {
-    scales: {
-        y: {
-            beginAtZero: true,
-        },
-    },
     plugins: {
         zoom: {
             zoom: {
@@ -28,15 +25,20 @@ export const options = {
                     enabled: true,
                 },
                 mode: "xy" as const,
+                drag: {
+                    enabled: true,
+                }
             },
         },
     },
 };
 
 interface Paras {
+    // Define the masses of the three stars
     m1: number;
     m2: number;
     m3: number;
+    // Define the initial positions and velocities of the three stars
     x1: number;
     y1: number;
     vx1: number;
@@ -64,6 +66,7 @@ export default function Home(props: { lang: keyof I18nText }) {
             },
         ],
     });
+    const [fetching, setFetching] = React.useState(false);
     const defaultParas: Paras = {
         m1: 1.989e30,
         m2: 9.945e29,
@@ -85,51 +88,11 @@ export default function Home(props: { lang: keyof I18nText }) {
         display_steps: 1000,
     };
     const [paras, setParas] = React.useState(defaultParas);
-    // Define the masses of the three stars
-    let m1 = 1.989e30;
-    let m2 = 9.945e29;
-    let m3 = 4.972e25;
-
-    // Define the initial positions and velocities of the three stars
-    let x1_0 = 0;
-    let y1_0 = 0;
-    let vx1_0 = 0;
-    let vy1_0 = 0;
-
-    let x2_0 = 149.6e9;
-    let y2_0 = 0;
-    let vx2_0 = 0;
-    let vy2_0 = 29.78e3;
-
-    let x3_0 = -149.6e9;
-    let y3_0 = 0;
-    let vx3_0 = 0;
-    let vy3_0 = -29.78e3;
-
-    let years = 500;
-    let steps = 100000;
-    let display_steps = 1000;
 
     const solve = async () => {
-        // let params = [
-        //     m1,
-        //     m2,
-        //     m3,
-        //     x1_0,
-        //     y1_0,
-        //     vx1_0,
-        //     vy1_0,
-        //     x2_0,
-        //     y2_0,
-        //     vx2_0,
-        //     vy2_0,
-        //     x3_0,
-        //     y3_0,
-        //     vx3_0,
-        //     vy3_0,
-        //     years,
-        //     steps,
-        // ];
+        setFetching(true);
+        let display_steps = paras["display_steps"];
+        if (display_steps == 0) display_steps = 1;
         const response = await API.get(
             "/api/threebody?query=" +
                 JSON.stringify(
@@ -145,40 +108,124 @@ export default function Home(props: { lang: keyof I18nText }) {
             datasets: [
                 {
                     label: "Star 1",
-                    data: x1.filter((x: number, i: number) => i % display_steps == 1).map((x: number, i: number) => ({ x: x, y: y1[i] })),
+                    data: x1
+                        .filter((x: number, i: number) => i % display_steps == 0)
+                        .map((x: number, i: number) => ({ x: x, y: y1[i] })),
                 },
                 {
                     label: "Star 2",
-                    data: x2.filter((x: number, i: number) => i % display_steps == 1).map((x: number, i: number) => ({ x: x, y: y2[i] })),
+                    data: x2
+                        .filter((x: number, i: number) => i % display_steps == 0)
+                        .map((x: number, i: number) => ({ x: x, y: y2[i] })),
                 },
                 {
                     label: "Star 3",
-                    data: x3.filter((x: number, i: number) => i % display_steps == 1).map((x: number, i: number) => ({ x: x, y: y3[i] })),
+                    data: x3
+                        .filter((x: number, i: number) => i % display_steps == 0)
+                        .map((x: number, i: number) => ({ x: x, y: y3[i] })),
                 },
             ],
         };
         console.log("reached???");
         setData(data);
+        setFetching(false);
     };
 
     return (
         <Container maxWidth="md">
-            <Box sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}>
-                {Object.entries(defaultParas).map(([k, v]) => (
-                    <TextField
-                        key={k}
-                        label={k}
-                        defaultValue={v.toExponential()}
-                        onChange={e => {
-                            let p = paras;
-                            p[k as keyof Paras] = Number(e.target.value);
-                            setParas(p);
-                        }}
-                    />
-                ))}
-            </Box>
-            <Button onClick={solve}>Solve</Button>
-            <Scatter options={options} data={data} />
+            <Stack spacing={2} alignItems="flex-start">
+                <Typography variant="h3">{getLocaleText(
+                                {
+                                    "en": "The Three-Body Problem",
+                                    "zh-Hant": "三體问题",
+                                    "zh-Hans": "三体问题",
+                                    "tto-bro": "CRVmae2 VFH3D8ae",
+                                    "tto": "ALCe7Z D AoKhFC Y-W",
+                                    "ja": "三体問題",
+                                    "de": "Das Dreikörperproblem",
+                                },
+                                lang
+                            )}</Typography>
+                <Box sx={{ "& .MuiTextField-root": { m: 1, width: "25ch" } }}>
+                    <div>
+                    {['m1', 'm2', 'm3'].map((k) => (
+                        <TextField
+                            key={k}
+                            label={k}
+                            defaultValue={paras[k as keyof Paras].toExponential()}
+                            onChange={e => {
+                                let p = paras;
+                                p[k as keyof Paras] = Number(e.target.value);
+                                setParas(p);
+                            }}
+                        />
+                    ))}
+                    </div>
+                    <div>
+                    {['x1', 'y1', 'vx1', 'vy1'].map((k) => (
+                        <TextField
+                            key={k}
+                            label={k}
+                            defaultValue={paras[k as keyof Paras].toExponential()}
+                            onChange={e => {
+                                let p = paras;
+                                p[k as keyof Paras] = Number(e.target.value);
+                                setParas(p);
+                            }}
+                        />
+                    ))}
+                    </div>
+                    <div>
+                    {['x2', 'y2', 'vx2', 'vy2'].map((k) => (
+                        <TextField
+                            key={k}
+                            label={k}
+                            defaultValue={paras[k as keyof Paras].toExponential()}
+                            onChange={e => {
+                                let p = paras;
+                                p[k as keyof Paras] = Number(e.target.value);
+                                setParas(p);
+                            }}
+                        />
+                    ))}
+                    </div>
+                    <div>
+                    {['x3', 'y3', 'vx3', 'vy3'].map((k) => (
+                        <TextField
+                            key={k}
+                            label={k}
+                            defaultValue={paras[k as keyof Paras].toExponential()}
+                            onChange={e => {
+                                let p = paras;
+                                p[k as keyof Paras] = Number(e.target.value);
+                                setParas(p);
+                            }}
+                        />
+                    ))}
+                    </div>
+                    <div>
+                    {['years', 'steps', 'display_steps'].map((k) => (
+                        <TextField
+                            key={k}
+                            label={k}
+                            defaultValue={paras[k as keyof Paras].toExponential()}
+                            onChange={e => {
+                                let p = paras;
+                                p[k as keyof Paras] = Number(e.target.value);
+                                setParas(p);
+                            }}
+                        />
+                    ))}
+                    </div>
+                </Box>
+                <Button onClick={solve} variant="contained" endIcon={<SendIcon />}>Solve</Button>
+                <Grid xs item>
+                {fetching&&
+                    <CircularProgress />
+                }
+                </Grid>
+                <Scatter options={options} data={data} />
+            </Stack>
         </Container>
     );
 }

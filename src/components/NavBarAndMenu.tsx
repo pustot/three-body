@@ -82,7 +82,7 @@ export default function NavBarAndMenu(props: {
         <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
                 <ListItem key="nameLogo" disablePadding>
-                    <ListItemButton component={Link} to="/">
+                    <ListItemButton component={MuiLink} href="https://yangchnx.com">
                         <ListItemText
                             inset
                             primary={getLocaleText(
@@ -98,85 +98,6 @@ export default function NavBarAndMenu(props: {
                                 lang
                             )}
                         />
-                    </ListItemButton>
-                </ListItem>
-                <ListItem key="home" disablePadding>
-                    <ListItemButton component={Link} to="/">
-                        <ListItemIcon>
-                            <HomeIcon />
-                        </ListItemIcon>
-                        {getLocaleText(
-                            {
-                                "en": "Home",
-                                "zh-Hant": "首頁",
-                                "zh-Hans": "首页",
-                                "tto-bro": "6dF2X8am",
-                                "tto": "XoV",
-                                "ja": "ホーム",
-                                "de": "Startseite",
-                            },
-                            lang
-                        )}
-                    </ListItemButton>
-                </ListItem>
-
-                <ListItem key="about" disablePadding>
-                    <ListItemButton component={Link} to="/about">
-                        <ListItemIcon>
-                            <InfoIcon />
-                        </ListItemIcon>
-                        {getLocaleText(
-                            {
-                                "en": "About",
-                                "zh-Hant": "關於",
-                                "zh-Hans": "关于",
-                                "tto-bro": "YQFRHOei",
-                                "tto": "aCmqSqv",
-                                "ja": "私について",
-                                "de": "Über Mich",
-                            },
-                            lang
-                        )}
-                    </ListItemButton>
-                </ListItem>
-
-                <ListItem key="blog" disablePadding>
-                    <ListItemButton component={Link} to="/blog">
-                        <ListItemIcon>
-                            <FeedIcon />
-                        </ListItemIcon>
-                        {getLocaleText(
-                            {
-                                "en": "Blog",
-                                "zh-Hant": "博客",
-                                "zh-Hans": "博客",
-                                "tto-bro": "b8Q7A",
-                                "tto": "bS7Y",
-                                "ja": "ブログ",
-                                "de": "Blog",
-                            },
-                            lang
-                        )}
-                    </ListItemButton>
-                </ListItem>
-
-                <ListItem key="love" disablePadding>
-                    <ListItemButton component={MuiLink} href="https://yangchnx.com/love/">
-                        <ListItemIcon>
-                            <FavoriteIcon />
-                        </ListItemIcon>
-                        {getLocaleText(
-                            {
-                                "en": "Love",
-                                "zh-Hant": "愛",
-                                "zh-Hans": "爱",
-                                "tto-bro": "Oie3",
-                                "tto": "Re",
-                                "ja": "愛",
-                                "de": "Liebe",
-                            },
-                            lang
-                        )}
                     </ListItemButton>
                 </ListItem>
             </List>
@@ -255,92 +176,17 @@ export default function NavBarAndMenu(props: {
                                 fontSize: 16,
                             }}
                             component={Link}
-                            to="/"
+                            to="/three-body"
                         >
                             {getLocaleText(
                                 {
-                                    "en": "Home",
-                                    "zh-Hant": "首頁",
-                                    "zh-Hans": "首页",
-                                    "tto-bro": "6dF2X8am",
-                                    "tto": "XoV",
-                                    "ja": "ホーム",
-                                    "de": "Startseite",
-                                },
-                                lang
-                            )}
-                        </Button>
-                        <Button
-                            variant="text"
-                            sx={{
-                                my: 2,
-                                color: "white",
-                                display: "block",
-                                textTransform: "none",
-                                fontSize: 16,
-                            }}
-                            component={Link}
-                            to="/about"
-                        >
-                            {getLocaleText(
-                                {
-                                    "en": "About",
-                                    "zh-Hant": "關於",
-                                    "zh-Hans": "关于",
-                                    "tto-bro": "YQFRHOei",
-                                    "tto": "aCmqSqv",
-                                    "ja": "私について",
-                                    "de": "Über Mich",
-                                },
-                                lang
-                            )}
-                        </Button>
-                        <Button
-                            variant="text"
-                            sx={{
-                                my: 2,
-                                color: "white",
-                                display: "block",
-                                textTransform: "none",
-                                fontSize: 16,
-                            }}
-                            component={Link}
-                            to="/blog"
-                        >
-                            {getLocaleText(
-                                {
-                                    "en": "Blog",
-                                    "zh-Hant": "博客",
-                                    "zh-Hans": "博客",
-                                    "tto-bro": "b8Q7A",
-                                    "tto": "bS7Y",
-                                    "ja": "ブログ",
-                                    "de": "Blog",
-                                },
-                                lang
-                            )}
-                        </Button>
-                        <Button
-                            variant="text"
-                            sx={{
-                                my: 2,
-                                color: "white",
-                                display: "block",
-                                textTransform: "none",
-                                fontSize: 16,
-                            }}
-                            component={MuiLink}
-                            href="https://yangchnx.com/love/"
-                        >
-                            {getLocaleText(
-                                {
-                                    "en": "Love",
-                                    "zh-Hant": "愛",
-                                    "zh-Hans": "爱",
-                                    "tto-bro": "Oie3",
-                                    "tto": "Re",
-                                    "ja": "愛",
-                                    "de": "Liebe",
+                                    "en": "Three-Body Problem",
+                                    "zh-Hant": "三體",
+                                    "zh-Hans": "三体",
+                                    "tto-bro": "CRVmae2",
+                                    "tto": "AoKhFC Y-W",
+                                    "ja": "三体",
+                                    "de": "Dreikörperproblem",
                                 },
                                 lang
                             )}
