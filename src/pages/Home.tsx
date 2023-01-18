@@ -175,7 +175,7 @@ export default function Home(props: { lang: keyof I18nText }) {
                             "zh-Hans": "调整下方的参数以模拟。",
                             "tto-bro": "D8aFTeLZ2 X8QR2bvRZ DaA ciVWvo3 Ed2 VoZd2.",
                             "tto": "RAAoVoDRKa X hRKRVamKFV aH eHNKR cs CeVFSRKa.",
-                            "ja": "以下のパラメーターを調整してシミュレートします。",
+                            "ja": "以下のパラメーターを調整してシミュレートしてください。",
                             "de": "Passen Sie die Parameter unten an, um zu simulieren.",
                         },
                         lang
