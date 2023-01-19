@@ -25,9 +25,12 @@ def threebody():
     output = {'ans': [x1, y1, x2, y2, x3, y3]}
     return output
 
-@app.route('/api/threebody/plot.png')
+@app.route('/api/threebody/plot.webp')
 def plot_png():
     fig = plot_figure_8()
     output = io.BytesIO()
-    FigureCanvas(fig).print_png(output)
-    return Response(output.getvalue(), mimetype='image/png')
+    FigureCanvas(fig).print_webp(output)
+    return Response(output.getvalue(), mimetype='image/webp')
+
+if __name__ == "__main__":
+    app.run()
