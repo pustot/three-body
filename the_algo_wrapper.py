@@ -54,4 +54,6 @@ def plot_return_fig(
         fig, update, interval=INTERVAL, blit=True
     )
 
-    plt.show()
+    # plt.show()
+
+    return fig, anim

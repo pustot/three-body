@@ -1,4 +1,6 @@
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+from matplotlib.backends.backend_svg import FigureCanvasSVG
+from matplotlib import animation
 from flask import Flask, request, Response
 from flask_cors import CORS
 from solve import solve
@@ -25,12 +27,19 @@ def threebody():
     output = {'ans': [x1, y1, x2, y2, x3, y3]}
     return output
 
-@app.route('/api/threebody/plot.webp')
+@app.route('/api/threebody/plot.gif')
 def plot_png():
-    fig = plot_figure_8()
+    fig, anim = plot_figure_8()
+
+    f = r"plot.gif" 
+    writergif = animation.PillowWriter(fps=30) 
+    anim.save(f, writer=writergif)
+    
     output = io.BytesIO()
-    FigureCanvas(fig).print_webp(output)
-    return Response(output.getvalue(), mimetype='image/webp')
+    # FigureCanvasSVG(anim).print_svg(output)
+    with open(f, "rb") as fh:
+        output = io.BytesIO(fh.read())
+    return Response(output.getvalue(), mimetype='image/gif')
 
 if __name__ == "__main__":
     app.run()
