@@ -1,4 +1,9 @@
 # three-body
+
+(此项目搁置中，后端有时没在运行)
+
+https://three-body.twaqngu.com/
+
 Three-body problem simulation
 
 ```sh

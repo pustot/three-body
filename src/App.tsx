@@ -60,9 +60,9 @@ export default function App() {
                         <br />
 
                         <Routes>
-                            <Route path="/three-body" element={<Home lang={lang} />} />
-                            <Route path="/three-body/home" element={<Home lang={lang} />} />
-                            <Route path="/three-body/about" element={<About lang={lang} />} />
+                            <Route path="" element={<Home lang={lang} />} />
+                            <Route path="/home" element={<Home lang={lang} />} />
+                            <Route path="/about" element={<About lang={lang} />} />
                             {/* <Route path="/blog/:fileName" element={<BlogArticle lang={lang} />} /> */}
                         </Routes>
 
